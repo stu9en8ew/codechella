@@ -10,7 +10,7 @@ public class Evento {
 
     @Id
     private Long id;
-    private TipoEvento tipoEvento;
+    private TipoEvento tipo;
     private String nome;
     private LocalDate data;
     private String descricao;
@@ -23,12 +23,12 @@ public class Evento {
         this.id = id;
     }
 
-    public TipoEvento getTipoEvento() {
-        return tipoEvento;
+    public TipoEvento getTipo() {
+        return tipo;
     }
 
-    public void setTipoEvento(TipoEvento tipoEvento) {
-        this.tipoEvento = tipoEvento;
+    public void setTipo(TipoEvento tipo) {
+        this.tipo = tipo;
     }
 
     public String getNome() {
