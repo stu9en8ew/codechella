@@ -1,6 +1,7 @@
 package br.com.alura.codechella;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -34,6 +35,7 @@ public class EventoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<EventoDto> cadastrar(@RequestBody EventoDto dto) {
         //return servico.cadastrar(dto);
         return servico.cadastrar(dto).doOnSuccess(e-> eventoSink.tryEmitNext(e));
@@ -62,6 +64,12 @@ public class EventoController {
 
         return Flux.merge(servico.obterPorTipo(tipo), eventoSink.asFlux())
                 .delayElements(Duration.ofSeconds(4));
+    }
+
+    @GetMapping("/{id}/traduzir/{idioma}")
+    public Mono<String> obterTraducao(@PathVariable Long id, @PathVariable String idioma){
+
+        return servico.obterTraducao(id, idioma);
     }
 
 
